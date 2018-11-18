@@ -10,12 +10,28 @@ TEST_CASE("make_string") {
     REQUIRE(actual != std::nullopt);
     REQUIRE(*actual == expected);
   }
+
   {
     // With Unicode characters
     std::string expected("example ★★ example");
     auto actual = pqrs::make_string(CFSTR("example ★★ example"));
     REQUIRE(actual != std::nullopt);
     REQUIRE(*actual == expected);
+  }
+
+  REQUIRE(pqrs::make_string(nullptr) == std::nullopt);
+
+  {
+    if (auto dictionary = CFDictionaryCreateMutable(nullptr,
+                                                    0,
+                                                    &kCFTypeDictionaryKeyCallBacks,
+                                                    &kCFTypeDictionaryValueCallBacks)) {
+      REQUIRE(pqrs::make_string(dictionary) == std::nullopt);
+
+      CFRelease(dictionary);
+    } else {
+      REQUIRE(false);
+    }
   }
 }
 
@@ -26,6 +42,7 @@ TEST_CASE("make_cf_string") {
     REQUIRE(actual);
     REQUIRE(CFEqual(*actual, expected));
   }
+
   {
     // With Unicode characters
     auto expected = CFSTR("example ★★ example");
