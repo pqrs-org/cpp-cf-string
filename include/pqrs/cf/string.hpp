@@ -1,17 +1,18 @@
 #pragma once
 
-// pqrs::cf_string v1.1
+// pqrs::cf::string v1.1
 
 // (C) Copyright Takayama Fumihiko 2018.
 // Distributed under the Boost Software License, Version 1.0.
 // (See http://www.boost.org/LICENSE_1_0.txt)
 
 #include <optional>
-#include <pqrs/cf_ptr.hpp>
+#include <pqrs/cf/cf_ptr.hpp>
 #include <string>
 #include <vector>
 
 namespace pqrs {
+namespace cf {
 inline std::optional<std::string> make_string(CFTypeRef value) {
   if (value) {
     if (CFGetTypeID(value) == CFStringGetTypeID()) {
@@ -46,4 +47,5 @@ inline cf_ptr<CFStringRef> make_cf_string(const std::string& string) {
 
   return result;
 }
+} // namespace cf
 } // namespace pqrs

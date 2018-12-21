@@ -1,8 +1,8 @@
 #include <iostream>
-#include <pqrs/cf_string.hpp>
+#include <pqrs/cf/string.hpp>
 
 int main(void) {
-  if (auto string = pqrs::make_string(CFSTR("example"))) {
+  if (auto string = pqrs::cf::make_string(CFSTR("example"))) {
     std::cout << *string << std::endl;
   }
 
@@ -10,7 +10,7 @@ int main(void) {
                                           "example ★ example",
                                           kCFStringEncodingUTF8);
 
-  if (auto s = pqrs::make_string(string)) {
+  if (auto s = pqrs::cf::make_string(string)) {
     std::cout << *s << std::endl;
   }
 
