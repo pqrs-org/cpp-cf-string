@@ -19,7 +19,8 @@ TEST_CASE("make_string") {
     REQUIRE(*actual == expected);
   }
 
-  REQUIRE(pqrs::cf::make_string(nullptr) == std::nullopt);
+  REQUIRE(pqrs::cf::make_string(static_cast<CFTypeRef>(nullptr)) == std::nullopt);
+  REQUIRE(pqrs::cf::make_string(static_cast<CFStringRef>(nullptr)) == std::nullopt);
 
   {
     if (auto dictionary = CFDictionaryCreateMutable(nullptr,
