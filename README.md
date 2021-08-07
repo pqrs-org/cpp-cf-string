@@ -1,5 +1,5 @@
 [![Build Status](https://github.com/pqrs-org/cpp-cf-string/workflows/CI/badge.svg)](https://github.com/pqrs-org/cpp-cf-string/actions)
-[![License](https://img.shields.io/badge/license-Boost%20Software%20License-blue.svg)](https://github.com/pqrs-org/cpp-cf-string/blob/master/LICENSE.md)
+[![License](https://img.shields.io/badge/license-Boost%20Software%20License-blue.svg)](https://github.com/pqrs-org/cpp-cf-string/blob/main/LICENSE.md)
 
 # cpp-cf-string
 
