@@ -1,7 +1,7 @@
 #include <boost/ut.hpp>
 #include <pqrs/cf/string.hpp>
 
-int main(void) {
+int main() {
   using namespace boost::ut;
   using namespace boost::ut::literals;
 
@@ -21,17 +21,22 @@ int main(void) {
       expect(*actual == expected);
     }
 
+    {
+      std::string expected("example");
+      auto actual = pqrs::cf::make_string(static_cast<CFTypeRef>(CFSTR("example")));
+      expect(actual != std::nullopt);
+      expect(*actual == expected);
+    }
+
     expect(pqrs::cf::make_string(static_cast<CFTypeRef>(nullptr)) == std::nullopt);
     expect(pqrs::cf::make_string(static_cast<CFStringRef>(nullptr)) == std::nullopt);
 
     {
-      if (auto dictionary = CFDictionaryCreateMutable(nullptr,
-                                                      0,
-                                                      &kCFTypeDictionaryKeyCallBacks,
-                                                      &kCFTypeDictionaryValueCallBacks)) {
-        expect(pqrs::cf::make_string(dictionary) == std::nullopt);
-
-        CFRelease(dictionary);
+      if (auto dictionary = pqrs::cf::adopt_cf_ptr(CFDictionaryCreateMutable(nullptr,
+                                                                             0,
+                                                                             &kCFTypeDictionaryKeyCallBacks,
+                                                                             &kCFTypeDictionaryValueCallBacks))) {
+        expect(pqrs::cf::make_string(*dictionary) == std::nullopt);
       } else {
         expect(false);
       }
